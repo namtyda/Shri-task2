@@ -30,6 +30,8 @@ function checkHeaders(ast) {
 
 // first — это тот, который должен идти до second
 function checkPositionHeaders(texts, firstBlockTypeName, secondBlockTypeName, error) {
+  // const fs = require('fs');
+  // fs.writeFileSync('stub', JSON.stringify(texts, null, 2));
   const errors = [];
   const firsts = texts.filter(header => getModValue(header, 'type') === firstBlockTypeName)
   const seconds = texts.filter(header => getModValue(header, 'type') === secondBlockTypeName)
