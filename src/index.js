@@ -1,5 +1,5 @@
 const parse = require('json-to-ast');
-const { checkWarning} = require('./warningRules');
+const { checkWarning } = require('./warningRules');
 const { checkHeaders } = require('./headersRules');
 const { checkGridProportions } = require('./gridRules');
 
@@ -15,11 +15,15 @@ const json = `{
           "content": [
               {
                   "block": "text",
-                  "mods": { "size": "m" }
+                  "mods": { "type": "h2" }
               },
               {
                   "block": "text",
-                  "mods": { "size": "l" }
+                  "mods": { "type": "h1" }
+              },
+              {
+                  "block": "text",
+                  "mods": { "type": "h1" }
               },
               { "block": "button", "mods": { "size": "s" } }
           ]
@@ -27,13 +31,17 @@ const json = `{
   ]
 }`;
 
-const errors = [];
-const ast = parse(json);
 
+function lint(str) {
+    const ast = parse(str);
+    const errors = [];
 
-checkWarning(ast, errors);
-checkGridProportions(ast, errors);
-checkHeaders(ast, errors);
+    checkWarning(ast, errors);
+    checkGridProportions(ast, errors);
+    checkHeaders(ast, errors);
 
+    // console.dir(errors, { depth: null });
+    return errors;
+}
 
-console.log(errors,{ depth: null});
+globalThis.lint = lint;

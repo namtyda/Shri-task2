@@ -16,7 +16,7 @@ function checkWarning(ast, errors) {
     if (texts.length > 0) {
       if (firstBlockModValue === null || !texts.every(text => getModValue(text, 'size') === firstBlockModValue)) {
         errors.push({
-          code: "WARNING.TEXT_SIZES_SHOULD_BE_EQUAL",
+          code: "WARNING111.TEXT_SIZES_SHOULD_BE_EQUAL",
           error: "Тексты в блоке warning должны быть одного размера",
           location: getLocation(warning)
         });
@@ -29,7 +29,7 @@ function checkWarning(ast, errors) {
       buttons.forEach(button => {
         if (getModValue(button, 'size') !== getRelativeSize(firstBlockModValue, 1)) {
           errors.push({
-            code: "WARNING.INVALID_BUTTON_SIZE",
+            code: "WARNING111.INVALID_BUTTON_SIZE",
             error: "Размер кнопки блока warning должен быть на 1 шаг больше эталонного",
             location: getLocation(button)
           });
@@ -42,7 +42,7 @@ function checkWarning(ast, errors) {
     for (const btn of buttons) {
       if (placeHolderSearchPosition.some(placeHolder => getLocation(btn).start.line < getLocation(placeHolder).start.line)) {
         errors.push({
-          code: "WARNING.INVALID_BUTTON_POSITION",
+          code: "WARNING111.INVALID_BUTTON_POSITION",
           error: "Блок button в блоке warning не может находиться перед блоком placeholder",
           location: getLocation(btn)
         })
@@ -54,7 +54,7 @@ function checkWarning(ast, errors) {
     placeHolders.forEach(place => {
       if (!placeholderSize.includes(getModValue(place, 'size'))) {
         errors.push({
-          code: "WARNING.INVALID_PLACEHOLDER_SIZE",
+          code: "WARNING111.INVALID_PLACEHOLDER_SIZE",
           error: "Недопустимые размеры для блока placeholder в блоке warning",
           location: getLocation(place)
         });
