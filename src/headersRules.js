@@ -6,7 +6,7 @@ function checkHeaders(ast) {
   const texts = findBlock(ast, 'text');
   const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
   if (headers.length > 1) {
-    headers.slice(1).forEach(header => {
+    headers.forEach(header => {
       errors.push({
         code: 'TEXT.SEVERAL_H1',
         error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
@@ -37,8 +37,6 @@ function checkHeaders(ast) {
 
 // first — это тот, который должен идти до second
 function checkPositionHeaders(texts, firstBlockTypeName, secondBlockTypeName, error) {
-  // const fs = require('fs');
-  // fs.writeFileSync('stub', JSON.stringify(texts, null, 2));
   const errors = [];
   const firsts = texts.filter(header => getModValue(header, 'type') === firstBlockTypeName);
   const seconds = texts.filter(header => getModValue(header, 'type') === secondBlockTypeName);
