@@ -20,11 +20,18 @@ function checkHeaders(ast) {
     code: "TEXT.INVALID_H2_POSITION",
     error: "Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня",
   }));
+
+  errors.push(...checkPositionHeaders(texts, 'h1', 'h3', {
+    code: "TEXT.INVALID_H3_POSITION",
+    error: "Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком первого уровня",
+  }));
+
   //third rule headers
   errors.push(...checkPositionHeaders(texts, 'h2', 'h3', {
     code: "TEXT.INVALID_H3_POSITION",
     error: "Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня",
   }));
+
   return errors;
 }
 

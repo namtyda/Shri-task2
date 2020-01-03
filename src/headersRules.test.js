@@ -3,7 +3,7 @@ const parse = require('json-to-ast');
 
 
 describe('checkHeaders', () => {
-  it('should return one error', () => {
+  it('[first rule]should return one error', () => {
     const json = `[
       {
           "block": "text",
@@ -35,6 +35,127 @@ describe('checkHeaders', () => {
       }
     });
   });
+
+  it('[second rule]should return one error', () => {
+    const json = `[
+      {
+          "block": "text",
+          "mods": { "type": "h2" }
+      },
+      {
+          "block": "text",
+          "mods": { "type": "h1" }
+      }
+  ]`
+
+    const ast = parse(json);
+    const result = checkHeaders(ast);
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBe(1);
+    expect(result[0]).toEqual({
+      code: "TEXT.INVALID_H2_POSITION",
+      error: "Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня",
+      location: {
+        end: {
+          column: 8,
+          line: 5,
+        },
+        start: {
+          column: 7,
+          line: 2,
+        },
+      }
+    });
+  });
+
+  it('[third rule]should return one error', () => {
+    const json = `[
+      {
+          "block": "text",
+          "mods": { "type": "h3" }
+      },
+      {
+          "block": "text",
+          "mods": { "type": "h2" }
+      }
+  ]`
+
+    const ast = parse(json);
+    const result = checkHeaders(ast);
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBe(1);
+    expect(result[0]).toEqual({
+      code: "TEXT.INVALID_H3_POSITION",
+      error: "Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня",
+      location: {
+        end: {
+          column: 8,
+          line: 5,
+        },
+        start: {
+          column: 7,
+          line: 2,
+        },
+      },
+    });
+  });
+
+  it('[first rule]should return empty array errors', () => {
+    const json = `[
+    {
+        "block": "text",
+        "mods": { "type": "h1" }
+    }
+]`
+
+
+    const ast = parse(json);
+    const result = checkHeaders(ast);
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBe(0);
+  });
+
+  it('[second rule]should return empty array errors', () => {
+    const json = `[
+      {
+          "block": "text",
+          "mods": { "type": "h1" }
+      },
+      {
+          "block": "text",
+          "mods": { "type": "h2" }
+      }
+  ]`
+
+    const ast = parse(json);
+    const result = checkHeaders(ast);
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBe(0);
+  });
+
+  it('[third rule]should return empty array errors', () => {
+    const json = `[
+      {
+          "block": "text",
+          "mods": { "type": "h2" }
+      },
+      {
+          "block": "text",
+          "mods": { "type": "h3" }
+      }
+  ]`
+
+    const ast = parse(json);
+    const result = checkHeaders(ast);
+
+    expect(result).toBeInstanceOf(Array);
+    expect(result.length).toBe(0);
+  });
+
 });
 
 
@@ -391,6 +512,7 @@ describe('checkPositionHeaders', () => {
       }
     ];
     const result = checkPositionHeaders(texts, 'h2', 'h3', {});
+    expect(result).toBeInstanceOf(Array);
     expect(result.length).toBe(1);
 
     const error = {
@@ -398,6 +520,7 @@ describe('checkPositionHeaders', () => {
       b: 'b'
     };
     const result2 = checkPositionHeaders(texts, 'h2', 'h3', error);
+    expect(result2).toBeInstanceOf(Array);
     expect(result2[0]).toEqual(expect.objectContaining({
       a: 'a',
       b: 'b',
