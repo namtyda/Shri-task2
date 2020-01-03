@@ -3,33 +3,16 @@ const { checkWarning } = require('./warningRules');
 const { checkHeaders } = require('./headersRules');
 const { checkGridProportions } = require('./gridRules');
 
-const json = `{
-  "block": "warning",
-  "content": [
-      {
-          "block": "placeholder",
-          "mods": { "size": "xl" }
-      },
-      {
-          "elem": "content",
-          "content": [
-              {
-                  "block": "text",
-                  "mods": { "type": "h2" }
-              },
-              {
-                  "block": "text",
-                  "mods": { "type": "h1" }
-              },
-              {
-                  "block": "text",
-                  "mods": { "type": "h1" }
-              },
-              { "block": "button", "mods": { "size": "s" } }
-          ]
-      }
-  ]
-}`;
+const json = `[
+    {
+        "block": "text",
+        "mods": { "type": "h3" }
+    },
+    {
+        "block": "text",
+        "mods": { "type": "h2" }
+    }
+]`;
 
 
 function lint(str) {
@@ -40,8 +23,9 @@ function lint(str) {
     errors.push(...checkGridProportions(ast));
     errors.push(...checkHeaders(ast));
 
-    // console.dir(errors, { depth: null });
+    console.dir(errors, { depth: null });
     return errors;
 }
 
+lint(json)
 globalThis.lint = lint;
