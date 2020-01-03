@@ -77,8 +77,8 @@ describe('checkGridProportions', () => {
     expect(result).toBeInstanceOf(Array);
     expect(result.length).toBe(1);
     expect(result[0]).toEqual({
-      code: "GRID.TOO_MUCH_MARKETING_BLOCKS",
-      error: "Маркетинговый блок занимает больше половины от всех колонок блока grid",
+      code: 'GRID.TOO_MUCH_MARKETING_BLOCKS',
+      error: 'Маркетинговый блок занимает больше половины от всех колонок блока grid',
       location: {
         end: {
           column: 6,

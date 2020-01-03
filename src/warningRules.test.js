@@ -14,8 +14,8 @@ describe('checkWarning', () => {
     const result = checkWarning(ast);
 
     expect(result[0]).toEqual({
-      code: "WARNING.TEXT_SIZES_SHOULD_BE_EQUAL",
-      error: "Тексты в блоке warning должны быть одного размера",
+      code: 'WARNING.TEXT_SIZES_SHOULD_BE_EQUAL',
+      error: 'Тексты в блоке warning должны быть одного размера',
       location: {
         end: {
           column: 4,
@@ -41,8 +41,8 @@ describe('checkWarning', () => {
     const result = checkWarning(ast);
 
     expect(result[0]).toEqual({
-      code: "WARNING.INVALID_BUTTON_SIZE",
-      error: "Размер кнопки блока warning должен быть на 1 шаг больше эталонного",
+      code: 'WARNING.INVALID_BUTTON_SIZE',
+      error: 'Размер кнопки блока warning должен быть на 1 шаг больше эталонного',
       location: {
         end: {
           column: 57,
@@ -68,8 +68,8 @@ describe('checkWarning', () => {
     const result = checkWarning(ast);
 
     expect(result[0]).toEqual({
-      code: "WARNING.INVALID_BUTTON_POSITION",
-      error: "Блок button в блоке warning не может находиться перед блоком placeholder",
+      code: 'WARNING.INVALID_BUTTON_POSITION',
+      error: 'Блок button в блоке warning не может находиться перед блоком placeholder',
       location: {
         end: {
           column: 57,
@@ -95,8 +95,8 @@ describe('checkWarning', () => {
     const result = checkWarning(ast);
 
     expect(result[0]).toEqual({
-      code: "WARNING.INVALID_PLACEHOLDER_SIZE",
-      error: "Недопустимые размеры для блока placeholder в блоке warning",
+      code: 'WARNING.INVALID_PLACEHOLDER_SIZE',
+      error: 'Недопустимые размеры для блока placeholder в блоке warning',
       location: {
         end: {
           column: 63,

@@ -46,7 +46,7 @@ function getModValue(block, modName, isElem = false) {
     if (!mod) {
       return null;
     }
-    return mod.value.value
+    return mod.value.value;
   }
 }
 
@@ -56,7 +56,7 @@ function getLocation(node) {
   return {
     start: { column: loc.start.column, line: loc.start.line },
     end: { column: loc.end.column, line: loc.end.line }
-  }
+  };
 }
 
 module.exports = { getRelativeSize, findBlock, getModValue, getLocation };

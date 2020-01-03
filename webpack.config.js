@@ -5,4 +5,4 @@ module.exports = {
     filename: 'linter.js',
     path: path.resolve(__dirname, 'build')
   }
-}
+};
