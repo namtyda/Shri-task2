@@ -36,9 +36,9 @@ function lint(str) {
     const ast = parse(str);
     const errors = [];
 
-    checkWarning(ast, errors);
-    checkGridProportions(ast, errors);
-    checkHeaders(ast, errors);
+    errors.push(...checkWarning(ast));
+    errors.push(...checkGridProportions(ast));
+    errors.push(...checkHeaders(ast));
 
     // console.dir(errors, { depth: null });
     return errors;

@@ -1,6 +1,7 @@
 const { findBlock, getModValue, getLocation } = require('./utils');
 
-function checkGridProportions(ast, errors) {
+function checkGridProportions(ast) {
+  const errors = [];
   const grids = findBlock(ast, 'grid');
 
   grids.forEach(grid => {
@@ -23,6 +24,7 @@ function checkGridProportions(ast, errors) {
       });
     }
   })
+  return errors;
 }
 
 function isMarketingFraction(node) {

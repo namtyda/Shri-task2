@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack --mode production",
     "dev": "webpack --mode development"
-
   },
   "keywords": [],
   "author": "",
@@ -16,6 +15,7 @@
     "json-to-ast": "^2.1.0"
   },
   "devDependencies": {
+    "jest": "^24.9.0",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10"
   }
