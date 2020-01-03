@@ -18,10 +18,6 @@ const json = `{
             "content": [
                 {
                     "block": "payment"
-                },
-                {
-                    "block": "text",
-                    "mods": { "type": "h3" }
                 }
             ]
         },
@@ -31,19 +27,14 @@ const json = `{
             "elemMods": {
                 "m-col": "2"
             },
-            
             "content": [
                 {
                     "block": "offer"
-                },
-                {
-                    "block": "text",
-                    "mods": { "type": "h1" }
                 }
             ]
         }
     ]
- }`;
+}`;
 
 
 function lint(str) {
@@ -54,7 +45,7 @@ function lint(str) {
   errors.push(...checkGridProportions(ast));
   errors.push(...checkHeaders(ast));
 
-  //   console.dir(errors, { depth: null });
+  
   return errors;
 }
 
