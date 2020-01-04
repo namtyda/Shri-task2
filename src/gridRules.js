@@ -15,7 +15,7 @@ function checkGridProportions(ast) {
         badCount += Number(getModValue(fraction, 'm-col', true));
       }
     });
-    if (badCount >( modGrid / 2)) {
+    if (badCount > ( modGrid / 2)) {
       errors.push({
         code: 'GRID.TOO_MUCH_MARKETING_BLOCKS',
         error: 'Маркетинговый блок занимает больше половины от всех колонок блока grid',
