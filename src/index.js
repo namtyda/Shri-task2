@@ -6,7 +6,11 @@ const { checkGridProportions } = require('./gridRules');
 const json = `[
     {
         "block": "text",
-        "mods": { "type": "h1" }
+        "mods": { "type": "h3" }
+    },
+    {
+        "block": "text",
+        "mods": { "type": "h2" }
     },
     {
         "block": "text",
@@ -23,7 +27,7 @@ function lint(str) {
   errors.push(...checkGridProportions(ast));
   errors.push(...checkHeaders(ast));
 
-
+ 
   return errors;
 }
 
