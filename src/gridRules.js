@@ -7,6 +7,8 @@ function checkGridProportions(ast) {
   grids.forEach(grid => {
     const content = grid.children.find(({ key }) => key.value === 'content');
     const children = content.value.children;
+    const modGrid = getModValue(grid, 'm-columns');
+    console.log(modGrid);
     let goodCount = 0;
     let badCount = 0;
     children.forEach(fraction => {
@@ -16,7 +18,7 @@ function checkGridProportions(ast) {
         goodCount += Number(getModValue(fraction, 'm-col', true));
       }
     });
-    if (badCount > goodCount) {
+    if (badCount >( modGrid / 2)) {
       errors.push({
         code: 'GRID.TOO_MUCH_MARKETING_BLOCKS',
         error: 'Маркетинговый блок занимает больше половины от всех колонок блока grid',
