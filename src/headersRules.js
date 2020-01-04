@@ -70,7 +70,7 @@ function checkHeaders(ast) {
   //       });
   //     }
   //   }
-  //   return errors;
+  return errors;
 }
 
 module.exports = { checkHeaders };
