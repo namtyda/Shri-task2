@@ -24,12 +24,14 @@ function checkHeaders(ast) {
             error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
             location: getLocation(texts[i])
           });
+          break;
         } else if (getModValue(texts[i], 'type') === 'h3' && getModValue(arr[k], 'type') === 'h1') {
           errors.push({
             code: 'TEXT.INVALID_H3_POSITION',
             error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком первого уровня',
             location: getLocation(texts[i])
           });
+          break;
         } else if (getModValue(texts[i], 'type') === 'h3' && getModValue(arr[k], 'type') === 'h2') {
           errors.push({
             code: 'TEXT.INVALID_H3_POSITION',
