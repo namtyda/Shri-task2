@@ -8,14 +8,11 @@ function checkGridProportions(ast) {
     const content = grid.children.find(({ key }) => key.value === 'content');
     const children = content.value.children;
     const modGrid = getModValue(grid, 'm-columns');
-    console.log(modGrid);
-    let goodCount = 0;
+    
     let badCount = 0;
     children.forEach(fraction => {
       if (isMarketingFraction(fraction)) {
         badCount += Number(getModValue(fraction, 'm-col', true));
-      } else {
-        goodCount += Number(getModValue(fraction, 'm-col', true));
       }
     });
     if (badCount >( modGrid / 2)) {

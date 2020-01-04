@@ -25,7 +25,7 @@ const json = `{
             "block": "grid",
             "elem": "fraction",
             "elemMods": {
-                "m-col": "8"
+                "m-col": "6"
             },
             "content": [
                 {
