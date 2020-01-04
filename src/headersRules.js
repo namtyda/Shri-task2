@@ -4,16 +4,60 @@ function checkHeaders(ast) {
   const errors = [];
   //first rule headers
   const texts = findBlock(ast, 'text');
-  const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
-  if (headers.length > 1) {
-    headers.slice(1).forEach(header => {
-      errors.push({
-        code: 'TEXT.SEVERAL_H1',
-        error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
-        location: getLocation(header)
-      });
+  // const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
+  // if (headers.length > 1) {
+  //   headers.slice(1).forEach(header => {
+  //     errors.push({
+  //       code: 'TEXT.SEVERAL_H1',
+  //       error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
+  //       location: getLocation(header)
+  //     });
+  //   });
+  // }
+
+
+  function check(texts) {
+    let h1 = false;
+    let h2 = false;
+    texts.forEach(header => {
+
+      if (getModValue(header, 'type') === 'h1') {
+        if (!h1) {
+          h1 = true;
+        } else {
+          errors.push({
+            code: 'TEXT.SEVERAL_H1',
+            error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
+            location: getLocation(header)
+          });
+        }
+      }
+
+      if (getModValue(header, 'type') === 'h2') {
+        h2 = true;
+        if (!h1) {
+          errors.push({
+            code: 'TEXT.INVALID_H2_POSITION',
+            error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
+            location: getLocation(header)
+          });
+        }
+      }
+
+      if (getModValue(header, 'type') === 'h3') {
+        if (!h2) {
+          errors.push({
+            code: 'TEXT.INVALID_H3_POSITION',
+            error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
+            location: getLocation(header)
+          });
+        }
+      }
     });
+
+
   }
+  check(texts);
 
   // function check(texts) {
   //   for (let i = 0; i < texts.length - 1; i++) {
