@@ -54,8 +54,8 @@ function getLocation(node) {
   const loc = node.loc;
 
   return {
-    start: { column: loc.start.column, line: loc.start.line },
-    end: { column: loc.end.column, line: loc.end.line }
+    start: { line: loc.start.line, column: loc.start.column },
+    end: { line: loc.end.line, column: loc.end.column }
   };
 }
 

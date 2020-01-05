@@ -35,7 +35,7 @@ function lint(str) {
   errors.push(...checkGridProportions(ast));
   errors.push(...checkHeaders(ast));
 
-  
+ 
   return errors;
 }
 
