@@ -4,40 +4,58 @@ function checkHeaders(ast) {
   const errors = [];
   //first rule headers
   const texts = findBlock(ast, 'text');
-  const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
-  if (headers.length > 1) {
-    headers.slice(1).forEach(header => {
-      errors.push({
-        code: 'TEXT.SEVERAL_H1',
-        error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
-        location: getLocation(header)
-      });
-    });
-  }
+  // const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
+  // if (headers.length > 1) {
+  //   headers.slice(1).forEach(header => {
+  //     errors.push({
+  //       code: 'TEXT.SEVERAL_H1',
+  //       error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
+  //       location: getLocation(header)
+  //     });
+  //   });
+  // }
 
 
-  function checkRulesH2AndH3(texts) {
-    for (let i = 0; i < texts.length - 1; i++) {
-      for (let k = i + 1; k < texts.length; k++) {
-        if (getModValue(texts[i], 'type') === 'h2' && getModValue(texts[k], 'type') === 'h1' && getModValue(texts[i + 1], 'type') !== 'h2') {
+  function check(texts) {
+    const context = {};
+    texts.forEach(header => {
+
+      if (getModValue(header, 'type') === 'h1') {
+        if (context.h1) {
           errors.push({
-            code: 'TEXT.INVALID_H2_POSITION',
-            error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
-            location: getLocation(texts[i])
+            code: 'TEXT.SEVERAL_H1',
+            error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
+            location: getLocation(header)
           });
-        }
-        if (getModValue(texts[i], 'type') === 'h3' && getModValue(texts[k], 'type') === 'h2') {
-          errors.push({
-            code: 'TEXT.INVALID_H3_POSITION',
-            error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
-            location: getLocation(texts[i])
-          });
+        } else {
+          context.h1 = header;
         }
       }
-    }
-  }
-  checkRulesH2AndH3(texts);
 
+      if (getModValue(header, 'type') === 'h2') {
+        context.h2 = header;
+      } else if (getModValue(header, 'type') === 'h1' && context.h2) {
+        errors.push({
+          code: 'TEXT.INVALID_H2_POSITION',
+          error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
+          location: getLocation(context.h2)
+        });
+      }
+
+      if (getModValue(header, 'type') === 'h3') {
+        context.h3 = header;
+      } else if (getModValue(header, 'type') === 'h2' && context.h3) {
+        errors.push({
+          code: 'TEXT.INVALID_H3_POSITION',
+          error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
+          location: getLocation(context.h3)
+        });
+      }
+    });
+
+
+  }
+  check(texts);
   // function checkH2Rules(texts) {
   //   for (let i = 0; i < texts.length - 1; i++) {
   //     if (getModValue(texts[i], 'type') === 'h2' && getModValue(texts[i + 1], 'type') === 'h1') {

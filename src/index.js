@@ -7,23 +7,22 @@ let json =
 `[
     {
         "block": "text",
-        "mods": { "type": "h3" }
-    },
-    {
-        "block": "text",
-        "mods": { "type": "h1" }
-    },
-    {
-        "block": "text",
         "mods": { "type": "h2" }
     },
     {
         "block": "text",
         "mods": { "type": "h1" }
+    },
+    {
+        "block": "text",
+        "mods": { "type": "h3" }
+    },
+    {
+        "block": "text",
+        "mods": { "type": "h2" }
     }
     
 ]`;
-
 
 function lint(str) {
   const ast = parse(str);
