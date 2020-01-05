@@ -3,16 +3,28 @@ const { checkWarning } = require('./warningRules');
 const { checkHeaders } = require('./headersRules');
 const { checkGridProportions } = require('./gridRules');
 
-const json = `[
+let json =
+`[
+    {
+        "block": "text",
+        "mods": { "type": "h1" }
+    },
     {
         "block": "text",
         "mods": { "type": "h2" }
     },
     {
         "block": "text",
-        "mods": { "type": "h1" }
+        "mods": { "type": "p" },
+        "content": [
+            {
+                "block": "text",
+                "mods": { "type": "h1" }
+            }
+        ]
     }
 ]`;
+
 
 
 function lint(str) {
