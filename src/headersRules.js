@@ -28,7 +28,7 @@ function checkHeaders(ast) {
             location: getLocation(header)
           });
         } else {
-          context.h1 = header;
+          context.h1 = true;
         }
       }
 

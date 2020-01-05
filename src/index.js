@@ -7,7 +7,7 @@ let json =
 `[
     {
         "block": "text",
-        "mods": { "type": "h3" }
+        "mods": { "type": "h1" }
     },
     {
         "block": "text",
@@ -28,12 +28,12 @@ function lint(str) {
   const ast = parse(str);
   const errors = [];
 
+  errors.push(...checkHeaders(ast));
   errors.push(...checkWarning(ast));
   errors.push(...checkGridProportions(ast));
-  errors.push(...checkHeaders(ast));
 
+ 
   return errors;
 }
-
 
 globalThis.lint = lint;
