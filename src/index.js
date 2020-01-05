@@ -7,6 +7,10 @@ let json =
 `[
     {
         "block": "text",
+        "mods": { "type": "h3" }
+    },
+    {
+        "block": "text",
         "mods": { "type": "h1" }
     },
     {
@@ -15,16 +19,10 @@ let json =
     },
     {
         "block": "text",
-        "mods": { "type": "p" },
-        "content": [
-            {
-                "block": "text",
-                "mods": { "type": "h1" }
-            }
-        ]
+        "mods": { "type": "h1" }
     }
+    
 ]`;
-
 
 
 function lint(str) {
@@ -35,9 +33,9 @@ function lint(str) {
   errors.push(...checkGridProportions(ast));
   errors.push(...checkHeaders(ast));
 
- 
+  console.dir(errors, {depth: null});
   return errors;
 }
-
+lint(json);
 
 globalThis.lint = lint;

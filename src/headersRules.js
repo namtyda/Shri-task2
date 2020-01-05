@@ -15,67 +15,69 @@ function checkHeaders(ast) {
     });
   }
 
-  
 
+  function checkRulesH2AndH3(texts) {
+    for (let i = 0; i < texts.length - 1; i++) {
+      for (let k = i + 1; k < texts.length; k++) {
+        if (getModValue(texts[i], 'type') === 'h2' && getModValue(texts[k], 'type') === 'h1' && getModValue(texts[i + 1], 'type') !== 'h2') {
+          errors.push({
+            code: 'TEXT.INVALID_H2_POSITION',
+            error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
+            location: getLocation(texts[i])
+          });
+        }
+        if (getModValue(texts[i], 'type') === 'h3' && getModValue(texts[k], 'type') === 'h2') {
+          errors.push({
+            code: 'TEXT.INVALID_H3_POSITION',
+            error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
+            location: getLocation(texts[i])
+          });
+        }
+      }
+    }
+  }
+  checkRulesH2AndH3(texts);
 
-  // function check(texts) {
+  // function checkH2Rules(texts) {
   //   for (let i = 0; i < texts.length - 1; i++) {
-  //     const arr = texts.slice(i + 1);
-  //     for (let k = 0; k < arr.length; k++) {
-  //       if (getModValue(texts[i], 'type') === 'h2' && getModValue(arr[k], 'type') === 'h1') {
-  //         errors.push({
-  //           code: 'TEXT.INVALID_H2_POSITION',
-  //           error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
-  //           location: getLocation(texts[i])
-  //         });
-  //         break;
-  //       } else if (getModValue(texts[i], 'type') === 'h3' && getModValue(arr[k], 'type') === 'h1') {
-  //         errors.push({
-  //           code: 'TEXT.INVALID_H3_POSITION',
-  //           error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком первого уровня',
-  //           location: getLocation(texts[i])
-  //         });
-  //         break;
-  //       } else if (getModValue(texts[i], 'type') === 'h3' && getModValue(arr[k], 'type') === 'h2') {
-  //         errors.push({
-  //           code: 'TEXT.INVALID_H3_POSITION',
-  //           error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
-  //           location: getLocation(texts[i])
-  //         });
-  //         break;
-  //       }
+  //     if (getModValue(texts[i], 'type') === 'h2' && getModValue(texts[i + 1], 'type') === 'h1') {
+  //       errors.push({
+  //         code: 'TEXT.INVALID_H2_POSITION',
+  //         error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
+  //         location: getLocation(texts[i])
+  //       });
   //     }
   //   }
   // }
-  // check(texts);
+  // checkH2Rules(texts);
   //second rule headers
-  errors.push(...checkPositionHeaders(texts, 'h1', 'h2', {
-    code: 'TEXT.INVALID_H2_POSITION',
-    error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
-  }));
+  // errors.push(...checkPositionHeaders(texts, 'h1', 'h2', {
+  //   code: 'TEXT.INVALID_H2_POSITION',
+  //   error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
+  // }));
 
   //third rule headers
-  errors.push(...checkPositionHeaders(texts, 'h2', 'h3', {
-    code: 'TEXT.INVALID_H3_POSITION',
-    error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
-  }));
+  // errors.push(...checkPositionHeaders(texts, 'h2', 'h3', {
+  //   code: 'TEXT.INVALID_H3_POSITION',
+  //   error: 'Заголовок третьего уровня блок text, с модификатором type h3, не может находиться перед заголовком второго уровня',
+  // }));
   return errors;
 }
 
 // first — это тот, который должен идти до second
-function checkPositionHeaders(texts, firstBlockTypeName, secondBlockTypeName, error) {
-  const errors = [];
-  const firsts = texts.filter(header => getModValue(header, 'type') === firstBlockTypeName);
-  const seconds = texts.filter(header => getModValue(header, 'type') === secondBlockTypeName);
-  for (const header of seconds) {
-    if (firsts.some(head => getLocation(header).start.line < getLocation(head).start.line)) {
-      errors.push({
-        ...error,
-        location: getLocation(header)
-      });
-    }
-  }
-  return errors;
-}
+// function checkPositionHeaders(texts, firstBlockTypeName, secondBlockTypeName, error) {
+//   const errors = [];
+//   const firsts = texts.filter(header => getModValue(header, 'type') === firstBlockTypeName);
+//   const seconds = texts.filter(header => getModValue(header, 'type') === secondBlockTypeName);
+//   for (const header of seconds) {
+//     if (firsts.some(head => getLocation(header).start.line < getLocation(head).start.line)) {
+//       errors.push({
+//         ...error,
+//         location: getLocation(header)
+//       });
+//     }
+//   }
+//   return errors;
+// }
 
 module.exports = { checkHeaders };
