@@ -56,18 +56,7 @@ function checkHeaders(ast) {
 
   }
   check(texts);
-  // function checkH2Rules(texts) {
-  //   for (let i = 0; i < texts.length - 1; i++) {
-  //     if (getModValue(texts[i], 'type') === 'h2' && getModValue(texts[i + 1], 'type') === 'h1') {
-  //       errors.push({
-  //         code: 'TEXT.INVALID_H2_POSITION',
-  //         error: 'Заголовок второго уровня блок text, с модификатором type h2, не может находиться перед заголовком первого уровня',
-  //         location: getLocation(texts[i])
-  //       });
-  //     }
-  //   }
-  // }
-  // checkH2Rules(texts);
+  
   //second rule headers
   // errors.push(...checkPositionHeaders(texts, 'h1', 'h2', {
   //   code: 'TEXT.INVALID_H2_POSITION',

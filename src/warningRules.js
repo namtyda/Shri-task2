@@ -30,7 +30,7 @@ function checkWarning(ast) {
       buttons.forEach(button => {
         if (getModValue(button, 'size') !== getRelativeSize(firstBlockModValue, 1)) {
           errors.push({
-            code: 'WARNING1111.INVALID_BUTTON_SIZE',
+            code: 'WARNING111.INVALID_BUTTON_SIZE',
             error: 'Размер кнопки блока warning должен быть на 1 шаг больше эталонного',
             location: getLocation(button)
           });
@@ -43,7 +43,7 @@ function checkWarning(ast) {
     for (const btn of buttons) {
       if (placeHolderSearchPosition.some(placeHolder => getLocation(btn).start.line < getLocation(placeHolder).start.line)) {
         errors.push({
-          code: 'WARNING1111.INVALID_BUTTON_POSITION',
+          code: 'WARNING111.INVALID_BUTTON_POSITION',
           error: 'Блок button в блоке warning не может находиться перед блоком placeholder',
           location: getLocation(btn)
         });
