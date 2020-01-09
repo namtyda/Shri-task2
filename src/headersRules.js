@@ -3,17 +3,17 @@ const { findBlock, getModValue, getLocation } = require('./utils');
 function checkHeaders(ast) {
   const errors = [];
   //first rule headers
-  const texts = findBlock(ast, 'text');
-  const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
-  if (headers.length > 1) {
-    headers.slice(1).forEach(header => {
-      errors.push({
-        code: 'TEXT.SEVERAL_H1',
-        error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
-        location: getLocation(header)
-      });
-    });
-  }
+  // const texts = findBlock(ast, 'text');
+  // const headers = texts.filter(header => getModValue(header, 'type') === 'h1');
+  // if (headers.length > 1) {
+  //   headers.slice(1).forEach(header => {
+  //     errors.push({
+  //       code: 'TEXT.SEVERAL_H1',
+  //       error: 'Заголовок первого уровня блок text, с модификатором type h1, на странице должен быть единственным',
+  //       location: getLocation(header)
+  //     });
+  //   });
+  // }
 
   // const fs = require('fs');
   // fs.writeFileSync('stub', JSON.stringify(ast, null, 2));	
