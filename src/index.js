@@ -11,11 +11,11 @@ let json =
         "content": [
             {
                 "block": "text",
-                "mods": { "type": "h1" }
+                "mods": { "type": "h2" }
             },
             {
                 "block": "text",
-                "mods": { "type": "h1" }
+                "mods": { "type": "h3" }
             }
         ]
     },
@@ -25,11 +25,11 @@ let json =
         "content": [
             {
                 "block": "text",
-                "mods": { "type": "h1" }
+                "mods": { "type": "h2" }
             },
             {
                 "block": "text",
-                "mods": { "type": "h3" }
+                "mods": { "type": "h2" }
             }
         ]
     }
@@ -40,11 +40,11 @@ function lint(str) {
   const errors = [];
 
   // errors.push(...checkWarning(ast));
-  errors.push(...checkGridProportions(ast));
+  //   errors.push(...checkGridProportions(ast));
   errors.push(...checkHeaders(ast));
 
 
-  // console.dir(errors, { depth: null });
+  //   console.dir(errors, { depth: null });
   return errors;
 }
 // lint(json);
