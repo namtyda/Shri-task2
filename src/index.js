@@ -40,7 +40,7 @@ function lint(str) {
   const errors = [];
 
   // errors.push(...checkWarning(ast));
-  // errors.push(...checkGridProportions(ast));
+  errors.push(...checkGridProportions(ast));
   errors.push(...checkHeaders(ast));
 
 
