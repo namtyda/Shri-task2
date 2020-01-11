@@ -63,12 +63,4 @@ function getLocation(node) {
   };
 }
 
-function isObject(obj) {
-  return Object.prototype.toString.call(obj) === '[object Object]';
-}
-
-function isHeader(child, value) {
-  return child.value && child.value.value && child.value.value === value;
-}
-
-module.exports = { getRelativeSize, findBlock, getModValue, getLocation, isObject, isHeader };
+module.exports = { getRelativeSize, findBlock, getModValue, getLocation };

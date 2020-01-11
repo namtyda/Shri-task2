@@ -1,4 +1,3 @@
-// const { checkHeaders} = require('./t.js');
 const { checkHeaders} = require('./headersRules');
 const parse = require('json-to-ast');
 
