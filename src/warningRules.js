@@ -1,4 +1,4 @@
-const { getRelativeSize, findBlock, getModValue, getLocation} = require('./utils');
+const { getRelativeSize, findBlock, getModValue, getLocation } = require('./utils');
 const placeholderSize = [
   's',
   'm',

@@ -29,8 +29,12 @@ function findBlock(node, blockName) {
     }
 
     const content = node.children.find(({ key }) => key.value === 'content');
-    if (content) {
-      content.value.children.forEach(contentNode => result.push(...findBlock(contentNode, blockName)));
+    if (content && content.value) {
+      if (content.type === 'Array') {
+        content.value.children.forEach(contentNode => result.push(...findBlock(contentNode, blockName)));
+      } else {
+        result.push(...findBlock(content.value, blockName));
+      }
     }
   }
   return result;
@@ -59,4 +63,12 @@ function getLocation(node) {
   };
 }
 
-module.exports = { getRelativeSize, findBlock, getModValue, getLocation };
+function isObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
+
+function isHeader(child, value) {
+  return child.value && child.value.value && child.value.value === value;
+}
+
+module.exports = { getRelativeSize, findBlock, getModValue, getLocation, isObject, isHeader };
